@@ -1,75 +1,65 @@
-import { Logger } from 'pino';
-import dotenv from 'dotenv';
 import { Commitment } from '@solana/web3.js';
+import dotenv from 'dotenv';
 import { logger } from './logger';
 
 dotenv.config();
-
-const retrieveEnvVariable = (variableName: string, logger: Logger) => {
-  const variable = process.env[variableName] || '';
-  if (!variable) {
-    logger.error(`${variableName} is not set`);
-    process.exit(1);
-  }
-  return variable;
-};
 
 const retrieveEnvVariableOptional = (variableName: string, defaultValue: string) => {
   const variable = process.env[variableName];
   return variable === undefined || variable === '' ? defaultValue : variable;
 };
 
-// Wallet
-export const PRIVATE_KEY = retrieveEnvVariable('PRIVATE_KEY', logger);
+// Wallet (empty => a temporary wallet is generated at startup; set a real one via dashboard "Add wallet")
+export const PRIVATE_KEY = retrieveEnvVariableOptional('PRIVATE_KEY', '');
 
 // Connection
 export const NETWORK = 'mainnet-beta';
-export const COMMITMENT_LEVEL: Commitment = retrieveEnvVariable('COMMITMENT_LEVEL', logger) as Commitment;
-export const RPC_ENDPOINT = retrieveEnvVariable('RPC_ENDPOINT', logger);
-export const RPC_WEBSOCKET_ENDPOINT = retrieveEnvVariable('RPC_WEBSOCKET_ENDPOINT', logger);
+export const COMMITMENT_LEVEL: Commitment = retrieveEnvVariableOptional('COMMITMENT_LEVEL', 'confirmed') as Commitment;
+export const RPC_ENDPOINT = retrieveEnvVariableOptional('RPC_ENDPOINT', 'https://api.mainnet-beta.solana.com');
+export const RPC_WEBSOCKET_ENDPOINT = retrieveEnvVariableOptional('RPC_WEBSOCKET_ENDPOINT', 'wss://api.mainnet-beta.solana.com');
 
 // Bot
-export const LOG_LEVEL = retrieveEnvVariable('LOG_LEVEL', logger);
-export const MAX_TOKENS_AT_THE_TIME = Number(retrieveEnvVariable('MAX_TOKENS_AT_THE_TIME', logger));
-export const COMPUTE_UNIT_LIMIT = Number(retrieveEnvVariable('COMPUTE_UNIT_LIMIT', logger));
-export const COMPUTE_UNIT_PRICE = Number(retrieveEnvVariable('COMPUTE_UNIT_PRICE', logger));
-export const PRE_LOAD_EXISTING_MARKETS = retrieveEnvVariable('PRE_LOAD_EXISTING_MARKETS', logger) === 'true';
-export const CACHE_NEW_MARKETS = retrieveEnvVariable('CACHE_NEW_MARKETS', logger) === 'true';
-export const TRANSACTION_EXECUTOR = retrieveEnvVariable('TRANSACTION_EXECUTOR', logger);
-export const CUSTOM_FEE = retrieveEnvVariable('CUSTOM_FEE', logger);
+export const LOG_LEVEL = retrieveEnvVariableOptional('LOG_LEVEL', 'info');
+export const MAX_TOKENS_AT_THE_TIME = Number(retrieveEnvVariableOptional('MAX_TOKENS_AT_THE_TIME', '1'));
+export const COMPUTE_UNIT_LIMIT = Number(retrieveEnvVariableOptional('COMPUTE_UNIT_LIMIT', '400000'));
+export const COMPUTE_UNIT_PRICE = Number(retrieveEnvVariableOptional('COMPUTE_UNIT_PRICE', '0'));
+export const PRE_LOAD_EXISTING_MARKETS = retrieveEnvVariableOptional('PRE_LOAD_EXISTING_MARKETS', 'false') === 'true';
+export const CACHE_NEW_MARKETS = retrieveEnvVariableOptional('CACHE_NEW_MARKETS', 'false') === 'true';
+export const TRANSACTION_EXECUTOR = retrieveEnvVariableOptional('TRANSACTION_EXECUTOR', 'default');
+export const CUSTOM_FEE = retrieveEnvVariableOptional('CUSTOM_FEE', '0.0001');
 
 // Buy
-export const AUTO_BUY_DELAY = Number(retrieveEnvVariable('AUTO_BUY_DELAY', logger));
-export const QUOTE_MINT = retrieveEnvVariable('QUOTE_MINT', logger);
-export const QUOTE_AMOUNT = retrieveEnvVariable('QUOTE_AMOUNT', logger);
-export const MAX_BUY_RETRIES = Number(retrieveEnvVariable('MAX_BUY_RETRIES', logger));
-export const BUY_SLIPPAGE = Number(retrieveEnvVariable('BUY_SLIPPAGE', logger));
+export const AUTO_BUY_DELAY = Number(retrieveEnvVariableOptional('AUTO_BUY_DELAY', '0'));
+export const QUOTE_MINT = retrieveEnvVariableOptional('QUOTE_MINT', 'SOL');
+export const QUOTE_AMOUNT = retrieveEnvVariableOptional('QUOTE_AMOUNT', '0.01');
+export const MAX_BUY_RETRIES = Number(retrieveEnvVariableOptional('MAX_BUY_RETRIES', '3'));
+export const BUY_SLIPPAGE = Number(retrieveEnvVariableOptional('BUY_SLIPPAGE', '20'));
 
 // Sell
-export const AUTO_SELL = retrieveEnvVariable('AUTO_SELL', logger) === 'true';
-export const AUTO_SELL_DELAY = Number(retrieveEnvVariable('AUTO_SELL_DELAY', logger));
-export const MAX_SELL_RETRIES = Number(retrieveEnvVariable('MAX_SELL_RETRIES', logger));
-export const TAKE_PROFIT = Number(retrieveEnvVariable('TAKE_PROFIT', logger));
-export const STOP_LOSS = Number(retrieveEnvVariable('STOP_LOSS', logger));
-export const TRAILING_STOP_LOSS = retrieveEnvVariable('TRAILING_STOP_LOSS', logger) === 'true';
-export const PRICE_CHECK_INTERVAL = Number(retrieveEnvVariable('PRICE_CHECK_INTERVAL', logger));
-export const PRICE_CHECK_DURATION = Number(retrieveEnvVariable('PRICE_CHECK_DURATION', logger));
-export const SELL_SLIPPAGE = Number(retrieveEnvVariable('SELL_SLIPPAGE', logger));
-export const SKIP_SELLING_IF_LOST_MORE_THAN = Number(retrieveEnvVariable('SKIP_SELLING_IF_LOST_MORE_THAN', logger));
+export const AUTO_SELL = retrieveEnvVariableOptional('AUTO_SELL', 'true') === 'true';
+export const AUTO_SELL_DELAY = Number(retrieveEnvVariableOptional('AUTO_SELL_DELAY', '0'));
+export const MAX_SELL_RETRIES = Number(retrieveEnvVariableOptional('MAX_SELL_RETRIES', '3'));
+export const TAKE_PROFIT = Number(retrieveEnvVariableOptional('TAKE_PROFIT', '5'));
+export const STOP_LOSS = Number(retrieveEnvVariableOptional('STOP_LOSS', '25'));
+export const TRAILING_STOP_LOSS = retrieveEnvVariableOptional('TRAILING_STOP_LOSS', 'true') === 'true';
+export const PRICE_CHECK_INTERVAL = Number(retrieveEnvVariableOptional('PRICE_CHECK_INTERVAL', '2500'));
+export const PRICE_CHECK_DURATION = Number(retrieveEnvVariableOptional('PRICE_CHECK_DURATION', '180000'));
+export const SELL_SLIPPAGE = Number(retrieveEnvVariableOptional('SELL_SLIPPAGE', '20'));
+export const SKIP_SELLING_IF_LOST_MORE_THAN = Number(retrieveEnvVariableOptional('SKIP_SELLING_IF_LOST_MORE_THAN', '90'));
 
 // Filters
-export const FILTER_CHECK_INTERVAL = Number(retrieveEnvVariable('FILTER_CHECK_INTERVAL', logger));
-export const FILTER_CHECK_DURATION = Number(retrieveEnvVariable('FILTER_CHECK_DURATION', logger));
-export const CONSECUTIVE_FILTER_MATCHES = Number(retrieveEnvVariable('CONSECUTIVE_FILTER_MATCHES', logger));
-export const CHECK_IF_MUTABLE = retrieveEnvVariable('CHECK_IF_MUTABLE', logger) === 'true';
-export const CHECK_IF_SOCIALS = retrieveEnvVariable('CHECK_IF_SOCIALS', logger) === 'true';
-export const CHECK_IF_MINT_IS_RENOUNCED = retrieveEnvVariable('CHECK_IF_MINT_IS_RENOUNCED', logger) === 'true';
-export const CHECK_IF_FREEZABLE = retrieveEnvVariable('CHECK_IF_FREEZABLE', logger) === 'true';
-export const CHECK_IF_BURNED = retrieveEnvVariable('CHECK_IF_BURNED', logger) === 'true';
-export const MIN_POOL_SIZE = retrieveEnvVariable('MIN_POOL_SIZE', logger);
-export const MAX_POOL_SIZE = retrieveEnvVariable('MAX_POOL_SIZE', logger);
-export const USE_SNIPE_LIST = retrieveEnvVariable('USE_SNIPE_LIST', logger) === 'true';
-export const SNIPE_LIST_REFRESH_INTERVAL = Number(retrieveEnvVariable('SNIPE_LIST_REFRESH_INTERVAL', logger));
+export const FILTER_CHECK_INTERVAL = Number(retrieveEnvVariableOptional('FILTER_CHECK_INTERVAL', '2000'));
+export const FILTER_CHECK_DURATION = Number(retrieveEnvVariableOptional('FILTER_CHECK_DURATION', '0'));
+export const CONSECUTIVE_FILTER_MATCHES = Number(retrieveEnvVariableOptional('CONSECUTIVE_FILTER_MATCHES', '1'));
+export const CHECK_IF_MUTABLE = retrieveEnvVariableOptional('CHECK_IF_MUTABLE', 'false') === 'true';
+export const CHECK_IF_SOCIALS = retrieveEnvVariableOptional('CHECK_IF_SOCIALS', 'false') === 'true';
+export const CHECK_IF_MINT_IS_RENOUNCED = retrieveEnvVariableOptional('CHECK_IF_MINT_IS_RENOUNCED', 'false') === 'true';
+export const CHECK_IF_FREEZABLE = retrieveEnvVariableOptional('CHECK_IF_FREEZABLE', 'false') === 'true';
+export const CHECK_IF_BURNED = retrieveEnvVariableOptional('CHECK_IF_BURNED', 'false') === 'true';
+export const MIN_POOL_SIZE = retrieveEnvVariableOptional('MIN_POOL_SIZE', '0');
+export const MAX_POOL_SIZE = retrieveEnvVariableOptional('MAX_POOL_SIZE', '0');
+export const USE_SNIPE_LIST = retrieveEnvVariableOptional('USE_SNIPE_LIST', 'false') === 'true';
+export const SNIPE_LIST_REFRESH_INTERVAL = Number(retrieveEnvVariableOptional('SNIPE_LIST_REFRESH_INTERVAL', '30000'));
 
 // Jupiter aggregator (Swap API V2 router: https://api.jup.ag/swap/v2/build)
 export const JUPITER_API_URL = retrieveEnvVariableOptional('JUPITER_API_URL', 'https://api.jup.ag/swap/v2');
