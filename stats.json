@@ -1,0 +1,51 @@
+[
+  {
+    "time": "2026-11-02T18:47:47.662Z",
+    "mint": "2xoWSkweiC2wpTrPfMcr8xjw1NsVa3BLSQmF5K8kpump",
+    "side": "buy",
+    "quoteAmount": 0.004163891,
+    "signature": "47AJ7MGhWvecUxvYX9R61ZQCCoVmWNnm5vs72TmdqocApYA9drZguYAnKvzUgBPssnuUoGqjjn7HLCsxkjvy3Hpp"
+  },
+  {
+    "time": "2026-11-02T19:05:01.674Z",
+    "mint": "27bx3ectP8mmsPHaZrXaeh6xBMxZwsRohxDD4bsQpump",
+    "side": "buy",
+    "quoteAmount": 0.001886516,
+    "signature": "53Lr4RPGCwt3Ja22veN9zJ6uCit5SjWoXoxTk1nitxMZHM7y3JVxF39GpiSwEK3sKCU99DVSeMk4BcYoNxkTiWWt"
+  },
+  {
+    "time": "2026-11-02T19:06:26.743Z",
+    "mint": "Hr62mtq98nuYQ7ArcWnXLz22iF48nfgHm9ZGfGJXpump",
+    "side": "buy",
+    "quoteAmount": 0.004495132,
+    "signature": "65xP4GoZmsvXGh3YBMHiwQgkcR2qLD5rVnzrKjUwnq2V9QuitY6Pjn2AjPf8thLFvyh1aULioGgaqcAyLyJUwpYd"
+  },
+  {
+    "time": "2026-11-02T19:08:08.456Z",
+    "mint": "H89Ldxqm2xLfD5DetEQQEoz95vz5Ds3QZpZQbqNypump",
+    "side": "buy",
+    "quoteAmount": 0.002308502,
+    "signature": "5fZqotiN6onqmrJgRhsA5aB68PSwzGVQk8hGh3Jfat1tR49qjG8PFNwEBP5NXmXxe7tPtq4YrX9bqyF5gohnJGeM"
+  },
+  {
+    "time": "2026-11-02T19:12:14.714Z",
+    "mint": "B4k2Hb9ocJ1N16KNjFZe1VsHPsLknkNqus5Jw7cDpump",
+    "side": "buy",
+    "quoteAmount": 0.001828802,
+    "signature": "3LStsmXphPT7NLvyuBxjYKF4MLBJQbhRWio1im9ASnfBBbSuSt2nLRGrUNCHz7ZXtBS9oVdNu5ZzkbjnCy5uk3bP"
+  },
+  {
+    "time": "2026-11-02T19:12:56.799Z",
+    "mint": "2DFmAhHtv9BjLLRhueB9FMz6u7B29ctw47u9AL6Ypump",
+    "side": "buy",
+    "quoteAmount": 0.000776513,
+    "signature": "614VfD1zyBftL8mwKevXeCydQyNm7bWPZEkNjtQsxA96AKD1co8G3xpv1H9PsGsQaPgmKwnrddAZHPvnAXu87xBi"
+  },
+  {
+    "time": "2026-11-02T19:47:54.011Z",
+    "mint": "9dZo4hmKjvC92nunupwcUGAoAK9LSi65h7aP5Tai3tqu",
+    "side": "buy",
+    "quoteAmount": 0.001,
+    "signature": "4YxpMrhM8d3NkS1q3HZ39B2UcLHa4D1tsAEMQkAvBNHoeFxiVs8jAFaPKkpkBGLfYbyy2C79czzhXAx9gbuJy42H"
+  }
+]
