@@ -265,7 +265,15 @@ const runListener = async () => {
     }
   }
 
-  const wallet = getWallet(PRIVATE_KEY.trim());
+  // no PRIVATE_KEY? generate a temporary wallet instead of crashing —
+  // a real key can be pasted later via dashboard "Add wallet" (persisted to .env)
+  const wallet = PRIVATE_KEY.trim() ? getWallet(PRIVATE_KEY.trim()) : Keypair.generate();
+  if (!PRIVATE_KEY.trim()) {
+    logger.warn(
+      `PRIVATE_KEY is not set — generated a TEMPORARY wallet ${wallet.publicKey.toString()}. ` +
+        `Fund it and paste its private key via dashboard "Add wallet" (or .env) to keep it.`,
+    );
+  }
   const quoteToken = getToken(QUOTE_MINT);
   const botConfig = <BotConfig>{
     wallet,
